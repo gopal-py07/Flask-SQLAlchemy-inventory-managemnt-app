@@ -1,0 +1,155 @@
+create folder with project name 
+
+crete folder stucture 
+
+the crete env for your project and  activate it
+
+install dependancy
+
+immplment application  factorry pattern
+
+================================================================================================================
+step 1
+ 1.1 Python Installed
+		python --version
+ 1.2 Virtual Environment Activated
+		python -m venv venv
+		source venv/bin/activate
+
+ 1.3 Flask and Extensions Installed
+		pip install flask flask-sqlalchemy flask-migrate flask-wtf flask-login python-dotenv
+	
+		pip freeze > requirements.txt
+
+
+ 1.4 Secure SECRET_KEY Generated and Configured   
+		open terminal 
+		python -c "import secrets; print(secrets.token_hex(32))"
+		project root, create a .env file:
+				SECRET_KEY=6c6f4ff13f8bda95c08e3b14ad8e8f91c56c52420e765ec4aa8b7e6b4fcf1b9b
+	
+
+ 1.4 Project Directory Structure Created
+		 flask_inventory/
+		├── app/
+		│   ├── __init__.py         # Flask App Factory
+		│   ├── models.py           # Database Models
+		│   ├── forms.py            # Flask-WTF Forms
+		│   ├── routes/             # App Routes
+		│   │   ├── __init__.py     # Route Initialization
+		│   │   ├── inventory_routes.py # CRUD Routes
+		│   │   ├── api_routes.py   # REST API Routes
+		│   ├── templates/          # HTML Templates
+		│   ├── static/             # Static Files
+		├── config/                 # Configuration Files
+		│   ├── __init__.py         # Config Initialization
+		│   ├── dev.py              # Development Config
+		│   ├── prod.py             # Production Config
+		├── migrations/             # Database Migrations
+		├── .env                    # Environment Variables
+		├── requirements.txt        # Python Dependencies
+		├── wsgi.py                 # WSGI Entry Point
+
+		initalise flask and extention insid app/__init__.py
+			write code
+		
+		config/dev.py: Configuration for development:
+			write code
+		
+		wsgi.py: Entry point to run the Flask app:
+			write code
+	
+ 1.5 Database Initialized
+		flask db init
+			flask db init - Sets up the migration directory.
+			
+						<SQLAlchemy>
+						Creating directory 'F:\\Flask\\inventory_managment\\migrat
+						ions' ...  done
+						Creating directory 'F:\\Flask\\inventory_managment\\migrat
+						ions\\versions' ...  done
+						Generating F:\Flask\inventory_managment\migrations\alembic.ini ...  done
+						Generating F:\Flask\inventory_managment\migrations\env.py ...  done
+						Generating F:\Flask\inventory_managment\migrations\README ...  done
+						Generating F:\Flask\inventory_managment\migrations\script.py.mako ...  done
+						Please edit configuration/connection/logging settings in 'F:\\Flask\\inventory_managment\\migrations\\alembic.ini' before proceeding.
+						
+		flask db migrate -m "Initial migration"  -  Creates a new migration script based on the changes detected in the models.
+						
+						(venv) PS F:\Flask\inventory_managment> flask db migrate -m "initial migration"
+						<SQLAlchemy>
+						INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+						INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+						INFO  [alembic.env] No changes in schema detected.
+						
+		flask db upgrade -  Applies the migration, creating the products table in the database
+				
+						<SQLAlchemy>
+						INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+						INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+						
+						
+						
+		A file named dev.db will be created in your project directory. inside instance folder
+	
+ 1.6 Test the Application
+		Run the Flask app:
+			python wsgi.py
+			http://127.0.0.1:5000/
+			
+=================================================================================================================================================================================
+
+Step 2: Database Models
+
+ 2.1 Understanding Models in Flask-SQLAlchemy:
+	In flast model is a python class with is inherit from db.model and attribute corrospond to coloumn in database table 
+	orm - easy way to intreation betn python obj and database recodrds
+	
+ 2.2 Defining the Product Mode
+	app/model.py 
+			uwrite code
+ 2.3 Integrating the Model with the Application
+			app/__init__.py 
+				update codd :    with app.app_context():
+										from inventory_managment.app import models
+				
+	
+  2.4 Creating the Database and Tables
+  
+		Initialize the Migration Environment (if not already done):
+						flask db init   - Sets up the migration directory.
+									
+			
+		Generate an Initial Migration:
+						flask db migrate -m "Initial migration - create products table"   -  Creates a new migration script based on the changes detected in the models.
+								
+								>>>
+								INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+								INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+								INFO  [alembic.autogenerate.compare] Detected added table 'products'
+								Generating F:\Flask\inventory_managment\migrations\versions\167f0f4e423c_initial_migration_create_products_table.py ...  do
+								ne
+			
+		Apply the Migration to the Database:
+						flask db upgrade        -  Applies the migration, creating the products table in the database.
+												
+									>>>
+									<SQLAlchemy>
+									INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+									INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+									INFO  [alembic.runtime.migration] Running upgrade  -> 167f0f4e423c, Initial migration - create products table
+									
+ 2.4 check in sqlight db beowser 
+
+
+				
+			
+			
+
+
+ 
+ 
+ 
+ 
+ 
+ 
